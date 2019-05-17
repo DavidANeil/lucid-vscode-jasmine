@@ -11,7 +11,10 @@ export function activate(context: vscode.ExtensionContext) {
 		const workspace = vscode.workspace.getWorkspaceFolder(spec.document.uri);
 		if (workspace) {
 			const configuration = vscode.workspace.getConfiguration('jasmine-bazel');
-			const terminal = (configuration.terminal === 'active' ? vscode.window.activeTerminal : undefined) || vscode.window.createTerminal({name: 'Bazel Test', cwd: workspace.uri, shellPath: '/bin/bash', });
+
+			const terminal = (configuration.terminal === 'active' ? vscode.window.activeTerminal : undefined) ||
+				vscode.window.terminals.find((terminal) => terminal.name === 'Bazel Test') ||
+				vscode.window.createTerminal({name: 'Bazel Test', cwd: workspace.uri, shellPath: '/bin/bash', });
 			terminal.show(true);
 			const pathToWorkspace = path.relative(process.cwd(), workspace.uri.path);
 			const pathToFile = path.relative(pathToWorkspace, spec.document.uri.path);
