@@ -1,7 +1,7 @@
 {
 	"name": "lucid-jasmine",
-	"displayName": "lucid-jasmine",
-	"description": "Allows Jasmine unit tests to be run from the editor.",
+	"displayName": "Jasmine Bazel Test Runner",
+	"description": "Allows Jasmine unit tests to be run from the editor using Bazel commands",
 	"version": "0.0.1",
 	"engines": {
 		"vscode": "^1.33.0"
@@ -9,14 +9,16 @@
 	"categories": [
 		"Other"
 	],
+	"keywords": ["bazel", "jasmine", "test", "runner"],
 	"activationEvents": [
-		"onCommand:extension.helloWorld"
+		"onLanguage:typescript",
+		"onCommand:lucidbazeltest.runTest"
 	],
 	"main": "./out/extension.js",
 	"contributes": {
 		"commands": [
 			{
-				"command": "extension.helloWorld",
+				"command": "lucidbazeltest.runTest",
 				"title": "Hello World"
 			}
 		]
