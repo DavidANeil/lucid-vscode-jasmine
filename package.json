@@ -2,14 +2,25 @@
 	"name": "lucid-jasmine",
 	"displayName": "Jasmine Bazel Test Runner",
 	"description": "Allows Jasmine unit tests to be run from the editor using Bazel commands",
-	"version": "0.0.1",
+	"version": "1.0.0",
 	"engines": {
 		"vscode": "^1.33.0"
 	},
 	"categories": [
 		"Other"
 	],
-	"keywords": ["bazel", "jasmine", "test", "runner"],
+	"publisher": "davidneil",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/DavidANeil/lucid-vscode-jasmine.git"
+	},
+	"icon": "icon.png",
+	"keywords": [
+		"bazel",
+		"jasmine",
+		"test",
+		"runner"
+	],
 	"activationEvents": [
 		"onLanguage:typescript",
 		"onCommand:lucidbazeltest.runTest"
