@@ -11,7 +11,6 @@
 			"request": "launch",
 			"runtimeExecutable": "${execPath}",
 			"args": [
-				"lucid/main/cake",
 				"--extensionDevelopmentPath=${workspaceFolder}"
 			],
 			"outFiles": [

@@ -6,7 +6,7 @@ import { Instruction } from './instruction';
 export class CodeLensProvider implements vscode.CodeLensProvider {
     constructor(private readonly languageServer: Parser) {}
 
-    get selector() {
+    public get selector() {
         return {
           language: 'typescript',
           scheme: 'file',
@@ -14,7 +14,7 @@ export class CodeLensProvider implements vscode.CodeLensProvider {
         }
     }
 
-    async provideCodeLenses(document: vscode.TextDocument, token: vscode.CancellationToken) {
+    public async provideCodeLenses(document: vscode.TextDocument, token: vscode.CancellationToken) {
         const describes = await this.languageServer.getDescribes(document.getText(), document, token);
         const lenses = describes.reduce((lenses, spec) => {
             if (spec.specFilter) {
@@ -35,7 +35,7 @@ export class CodeLensProvider implements vscode.CodeLensProvider {
         return lenses;
     }
 
-    async resolveCodeLens(codeLens: vscode.CodeLens, cancellationToken: vscode.CancellationToken) {
+    public resolveCodeLens(codeLens: vscode.CodeLens, cancellationToken: vscode.CancellationToken) {
         return codeLens;
     }
 

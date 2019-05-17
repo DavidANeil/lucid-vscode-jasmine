@@ -2,7 +2,7 @@
 	"name": "lucid-jasmine",
 	"displayName": "Jasmine Bazel Test Runner",
 	"description": "Allows Jasmine unit tests to be run from the editor using Bazel commands",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"engines": {
 		"vscode": "^1.33.0"
 	},
@@ -30,9 +30,14 @@
 		"commands": [
 			{
 				"command": "lucidbazeltest.runTest",
-				"title": "Hello World"
+				"title": "Run a given spec"
 			}
-		]
+		],
+		"menus": {
+			"commandPalette": [
+				{"command": "lucidbazeltest.runTest", "when": "false"}
+			]
+		}
 	},
 	"scripts": {
 		"vscode:prepublish": "npm run compile",
@@ -47,5 +52,8 @@
 		"tslint": "^5.12.1",
 		"@types/node": "^10.12.21",
 		"@types/mocha": "^2.2.42"
+	},
+	"dependencies": {
+		"typescript": "^3.3.1"
 	}
 }
