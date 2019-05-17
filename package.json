@@ -2,7 +2,7 @@
 	"name": "lucid-jasmine",
 	"displayName": "Jasmine Bazel Test Runner",
 	"description": "Allows Jasmine unit tests to be run from the editor using Bazel commands",
-	"version": "1.0.1",
+	"version": "1.0.2",
 	"engines": {
 		"vscode": "^1.33.0"
 	},
@@ -23,21 +23,33 @@
 	],
 	"activationEvents": [
 		"onLanguage:typescript",
-		"onCommand:lucidbazeltest.runTest"
+		"onCommand:lucid-jasmine.runTest"
 	],
 	"main": "./out/extension.js",
 	"contributes": {
 		"commands": [
 			{
-				"command": "lucidbazeltest.runTest",
+				"command": "lucid-jasmine.runTest",
 				"title": "Run a given spec"
 			}
 		],
 		"menus": {
 			"commandPalette": [
-				{"command": "lucidbazeltest.runTest", "when": "false"}
+				{"command": "lucid-jasmine.runTest", "when": "false"}
 			]
-		}
+		},
+		"configuration": {
+			"type": "object",
+			"title": "Jasmine Bazel Test Runner configuration",
+			"properties": {
+			  "jasmine-bazel.terminal": {
+				"type": "string",
+				"enum": ["active", "dedicated"],
+				"default": "active",
+				"description": "Use the active or dedicated terminal to run commands"
+			  }
+			}
+		  }
 	},
 	"scripts": {
 		"vscode:prepublish": "npm run compile",

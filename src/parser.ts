@@ -17,7 +17,7 @@ export class Parser {
             }
             if (ts.isCallExpression(node)) {
                 const children = node.getChildren();
-                let identifier = children.find((child) => {
+                const identifier = children.find((child) => {
                     return child.kind === ts.SyntaxKind.Identifier;
                 });
                 if (identifier) {

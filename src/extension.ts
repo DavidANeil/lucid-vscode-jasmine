@@ -6,11 +6,13 @@ import * as path from 'path';
 import { Instruction } from './instruction';
 
 export function activate(context: vscode.ExtensionContext) {
-	let disposable = vscode.commands.registerCommand('lucidbazeltest.runTest', (spec: Spec, instruction: Instruction) => {
-		// TODO: add an option to either A) use active (queue), B) always create new, C) Try to figure if active is in use, then create new, else use active
-		let terminal = vscode.window.activeTerminal || vscode.window.createTerminal('Bazel Test');
+	let disposable = vscode.commands.registerCommand('lucid-jasmine.runTest', (spec: Spec, instruction: Instruction) => {
+		// TODO: add an option to try to figure if active is in use, then create new, else use active
 		const workspace = vscode.workspace.getWorkspaceFolder(spec.document.uri);
 		if (workspace) {
+			const configuration = vscode.workspace.getConfiguration('jasmine-bazel');
+			const terminal = (configuration.terminal === 'active' ? vscode.window.activeTerminal : undefined) || vscode.window.createTerminal({name: 'Bazel Test', cwd: workspace.uri, shellPath: '/bin/bash', });
+			terminal.show(true);
 			const pathToWorkspace = path.relative(process.cwd(), workspace.uri.path);
 			const pathToFile = path.relative(pathToWorkspace, spec.document.uri.path);
 			//Prepare yourself for the most beautiful cmdline.
@@ -21,7 +23,8 @@ export function activate(context: vscode.ExtensionContext) {
 			const consoleCommand = `JAS_TARGET=$(bazel query ${pathToFile}); ${bazelType} ${bazelCommand} \${JAS_TARGET%:*}:${ruleName} ${bazelOptions} --test_filter="\${JAS_TARGET#*:}${(spec.specFilter ? '#' + spec.specFilter : '')}"`;
 			console.log('sending', consoleCommand);
 			terminal.sendText(consoleCommand, true);
-
+		} else {
+			vscode.window.showErrorMessage('No Workspace was found, open VSCode from a bazel workspace');
 		}
 
 	});
