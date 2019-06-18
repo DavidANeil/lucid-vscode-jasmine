@@ -8,7 +8,7 @@ export class Spec {
         public document: TextDocument,
     ) {
         if (this.specFilter) {
-            this.specFilter = this.specFilter.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+            this.specFilter = this.specFilter.replace(/[.*+?^${}()|[\]\\"]/g, '\\$&');
         }
     }
 }
