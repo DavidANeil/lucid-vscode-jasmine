@@ -52,6 +52,11 @@
 				"type": "boolean",
 				"default": false,
 				"description": "Prefix commands with a space character to exclude them from bash history"
+			  },
+			  "jasmine-bazel.cdGitRoot": {
+				"type": "boolean",
+				"default": true,
+				"description": "cd to git root at the beginning of each command"
 			  }
 			}
 		  }

@@ -24,7 +24,8 @@ export function activate(context: vscode.ExtensionContext) {
 			const bazelOptions = ''; // or '--config=debug'
 			const ruleName = 'specs'; // TODO: add an option to specify the rule name.
 			const prefixSpace = configuration.noHistory ? ' ' : '';
-			const consoleCommand = `${prefixSpace}JAS_TARGET=$(bazel query ${pathToFile}); ${bazelType} ${bazelCommand} \${JAS_TARGET%:*}:${ruleName} ${bazelOptions} --test_filter="\${JAS_TARGET#*:}${(spec.specFilter ? '#' + spec.specFilter : '')}"`;
+			const maybeMoveToGitRoot = configuration.cdGitRoot ? 'cd $(git rev-parse --show-toplevel); ' : '';
+			const consoleCommand = `${prefixSpace}${maybeMoveToGitRoot}JAS_TARGET=$(bazel query ${pathToFile}); ${bazelType} ${bazelCommand} \${JAS_TARGET%:*}:${ruleName} ${bazelOptions} --test_filter="\${JAS_TARGET#*:}${(spec.specFilter ? '#' + spec.specFilter : '')}"`;
 			console.log('sending', consoleCommand);
 			terminal.sendText(consoleCommand, true);
 		} else {
