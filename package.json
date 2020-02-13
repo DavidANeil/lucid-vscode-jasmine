@@ -2,7 +2,7 @@
 	"name": "lucid-jasmine",
 	"displayName": "Jasmine Bazel Test Runner",
 	"description": "Allows Jasmine unit tests to be run from the editor using Bazel commands",
-	"version": "2.0.1",
+	"version": "2.1.0",
 	"engines": {
 		"vscode": "^1.33.0"
 	},
@@ -61,6 +61,11 @@
 			  "jasmine-bazel.noHistory": {
 				"type": "boolean",
 				"default": false,
+				"description": "Prefix commands with a space character to exclude them from bash history"
+			  },
+			  "jasmine-bazel.ruleName": {
+				"type": "string",
+				"default": "specs",
 				"description": "Prefix commands with a space character to exclude them from bash history"
 			  }
 			}

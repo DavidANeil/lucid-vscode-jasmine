@@ -7,7 +7,6 @@ import { Instruction } from './instruction';
 
 export function activate(context: vscode.ExtensionContext) {
 	let disposable = vscode.commands.registerCommand('lucid-jasmine.runTest', (spec: Spec, instruction: Instruction) => {
-		// TODO: add an option to try to figure if active is in use, then create new, else use active
 		const workspace = vscode.workspace.getWorkspaceFolder(spec.document.uri);
 		if (workspace) {
 			const configuration = vscode.workspace.getConfiguration('jasmine-bazel');
@@ -22,7 +21,7 @@ export function activate(context: vscode.ExtensionContext) {
 			const bazelType = instruction === Instruction.Test ? 'bazel' : 'ibazel';
 			const bazelCommand = instruction == Instruction.Debug ? 'run' : 'test';
 			const bazelOptions = ''; // or '--config=debug'
-			const ruleName = 'specs'; // TODO: add an option to specify the rule name.
+			const ruleName = configuration.ruleName ?? 'specs';
 			const prefixSpace = configuration.noHistory ? ' ' : '';
 			const cdCommand = configuration.cd === true ? `cd ${workspace.uri.path} && `: '';
 			const consoleCommand = `${prefixSpace}(${cdCommand}JAS_TARGET=$(bazel query ${pathToFile}); ${bazelType} ${bazelCommand} \${JAS_TARGET%:*}:${ruleName} ${bazelOptions} --test_filter="\${JAS_TARGET#*:}${(spec.specFilter ? '#' + spec.specFilter : '')}")`;
