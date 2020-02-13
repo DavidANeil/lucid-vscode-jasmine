@@ -2,7 +2,7 @@
 	"name": "lucid-jasmine",
 	"displayName": "Jasmine Bazel Test Runner",
 	"description": "Allows Jasmine unit tests to be run from the editor using Bazel commands",
-	"version": "2.2.0",
+	"version": "2.2.1",
 	"engines": {
 		"vscode": "^1.42.0"
 	},

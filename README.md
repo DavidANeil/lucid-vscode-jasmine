@@ -10,9 +10,6 @@ Runs the test using `bazel test`
 ### Debug Test
 Runs the test using `ibazel run`
 
-### Watch Test
-Runs the test using `ibazel test`
-
 ## Configuration
 
 ### Terminal
