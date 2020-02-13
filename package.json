@@ -4,7 +4,7 @@
 	"description": "Allows Jasmine unit tests to be run from the editor using Bazel commands",
 	"version": "2.1.0",
 	"engines": {
-		"vscode": "^1.33.0"
+		"vscode": "^1.42.0"
 	},
 	"categories": [
 		"Other"
@@ -35,52 +35,63 @@
 		],
 		"menus": {
 			"commandPalette": [
-				{"command": "lucid-jasmine.runTest", "when": "false"}
+				{
+					"command": "lucid-jasmine.runTest",
+					"when": "false"
+				}
 			]
 		},
 		"configuration": {
 			"type": "object",
 			"title": "Jasmine Bazel Test Runner configuration",
 			"properties": {
-			  "jasmine-bazel.terminal": {
-				"type": "string",
-				"enum": ["active", "dedicated", "new"],
-				"default": "active",
-				"description": "Use the active, new, or dedicated terminal to run commands"
-			  },
-			  "jasmine-bazel.cd": {
-				  "type": ["boolean"],
-				  "default": true,
-				  "description": "Add a `cd` invocation to the script so that it will work in other directories"
-			  },
-			  "jasmine-bazel.matcher": {
-				"type": ["string", "null"],
-				"default": null,
-				"description": "Use an additional RegEx to match function calls"
-			  },
-			  "jasmine-bazel.noHistory": {
-				"type": "boolean",
-				"default": false,
-				"description": "Prefix commands with a space character to exclude them from bash history"
-			  },
-			  "jasmine-bazel.ruleName": {
-				"type": "string",
-				"default": "specs",
-				"description": "Prefix commands with a space character to exclude them from bash history"
-			  }
+				"jasmine-bazel.terminal": {
+					"type": "string",
+					"enum": [
+						"active",
+						"dedicated",
+						"new"
+					],
+					"default": "active",
+					"description": "Use the active, new, or dedicated terminal to run commands"
+				},
+				"jasmine-bazel.cd": {
+					"type": [
+						"boolean"
+					],
+					"default": true,
+					"description": "Add a `cd` invocation to the script so that it will work in other directories"
+				},
+				"jasmine-bazel.matcher": {
+					"type": [
+						"string",
+						"null"
+					],
+					"default": null,
+					"description": "Use an additional RegEx to match function calls"
+				},
+				"jasmine-bazel.noHistory": {
+					"type": "boolean",
+					"default": false,
+					"description": "Prefix commands with a space character to exclude them from bash history"
+				},
+				"jasmine-bazel.ruleName": {
+					"type": "string",
+					"default": "specs",
+					"description": "Prefix commands with a space character to exclude them from bash history"
+				}
 			}
-		  }
+		}
 	},
 	"scripts": {
 		"vscode:prepublish": "npm run compile",
 		"compile": "tsc -p ./",
 		"watch": "tsc -watch -p ./",
-		"postinstall": "node ./node_modules/vscode/bin/install",
 		"test": "npm run compile && node ./node_modules/vscode/bin/test"
 	},
 	"devDependencies": {
 		"typescript": "^3.7.5",
-		"vscode": "^1.1.28",
+		"@types/vscode": "^1.42.0",
 		"tslint": "^5.12.1",
 		"@types/node": "^10.12.21",
 		"@types/mocha": "^2.2.42"
