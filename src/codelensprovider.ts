@@ -23,13 +23,13 @@ export class CodeLensProvider implements vscode.CodeLensProvider {
                 return lenses.concat([
                     new vscode.CodeLens(spec.range, {title: 'Run Test', command: 'lucid-jasmine.runTest', arguments: [spec, Instruction.Test]}),
                     new vscode.CodeLens(spec.range, {title: 'Debug Test', command: 'lucid-jasmine.runTest', arguments: [spec, Instruction.Debug]}),
-                    new vscode.CodeLens(spec.range, {title: 'Watch Test', command: 'lucid-jasmine.runTest', arguments: [spec, Instruction.Watch]}),
+                    // new vscode.CodeLens(spec.range, {title: 'Watch Test', command: 'lucid-jasmine.runTest', arguments: [spec, Instruction.Watch]}),
                 ]);
             } else {
                 return lenses.concat([
                     new vscode.CodeLens(spec.range, {title: 'Run All Tests', command: 'lucid-jasmine.runTest', arguments: [spec, Instruction.Test]}),
                     new vscode.CodeLens(spec.range, {title: 'Debug All Tests', command: 'lucid-jasmine.runTest', arguments: [spec, Instruction.Debug]}),
-                    new vscode.CodeLens(spec.range, {title: 'Watch All Tests', command: 'lucid-jasmine.runTest', arguments: [spec, Instruction.Watch]}),
+                    // new vscode.CodeLens(spec.range, {title: 'Watch All Tests', command: 'lucid-jasmine.runTest', arguments: [spec, Instruction.Watch]}),
                 ]);
             }
         }, [] as vscode.CodeLens[]);
