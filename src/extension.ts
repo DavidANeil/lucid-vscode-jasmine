@@ -13,8 +13,8 @@ export function activate(context: vscode.ExtensionContext) {
 			const configuration = vscode.workspace.getConfiguration('jasmine-bazel');
 
 			const terminal = (configuration.terminal === 'active' ? vscode.window.activeTerminal : undefined) ||
-				vscode.window.terminals.find((terminal) => terminal.name === 'Bazel Test') ||
-				vscode.window.createTerminal({name: 'Bazel Test', cwd: workspace.uri, shellPath: '/bin/bash', });
+				(configuration.terminal === 'dedicated' && vscode.window.terminals.find((terminal) => terminal.name === 'Bazel Test')) ||
+				vscode.window.createTerminal({name: 'Bazel Test', cwd: workspace.uri.path, shellPath: '/bin/bash', });
 			terminal.show(true);
 			const pathToWorkspace = path.relative(process.cwd(), workspace.uri.path);
 			const pathToFile = path.relative(pathToWorkspace, spec.document.uri.path);
@@ -24,7 +24,8 @@ export function activate(context: vscode.ExtensionContext) {
 			const bazelOptions = ''; // or '--config=debug'
 			const ruleName = 'specs'; // TODO: add an option to specify the rule name.
 			const prefixSpace = configuration.noHistory ? ' ' : '';
-			const consoleCommand = `${prefixSpace}JAS_TARGET=$(bazel query ${pathToFile}); ${bazelType} ${bazelCommand} \${JAS_TARGET%:*}:${ruleName} ${bazelOptions} --test_filter="\${JAS_TARGET#*:}${(spec.specFilter ? '#' + spec.specFilter : '')}"`;
+			const cdCommand = configuration.cd === true ? `cd ${workspace.uri.path} && `: '';
+			const consoleCommand = `${prefixSpace}(${cdCommand}JAS_TARGET=$(bazel query ${pathToFile}); ${bazelType} ${bazelCommand} \${JAS_TARGET%:*}:${ruleName} ${bazelOptions} --test_filter="\${JAS_TARGET#*:}${(spec.specFilter ? '#' + spec.specFilter : '')}")`;
 			console.log('sending', consoleCommand);
 			terminal.sendText(consoleCommand, true);
 		} else {

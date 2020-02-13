@@ -4,6 +4,8 @@ import { Parser } from './parser';
 import { Instruction } from './instruction';
 
 export class CodeLensProvider implements vscode.CodeLensProvider {
+    private configuration = vscode.workspace.getConfiguration('jasmine-bazel');
+    private userRegExp = this.configuration.matcher ? new RegExp(this.configuration.matcher) : undefined;
     constructor(private readonly languageServer: Parser) {}
 
     public get selector() {
@@ -15,7 +17,7 @@ export class CodeLensProvider implements vscode.CodeLensProvider {
     }
 
     public async provideCodeLenses(document: vscode.TextDocument, token: vscode.CancellationToken) {
-        const describes = await this.languageServer.getDescribes(document.getText(), document, token);
+        const describes = await this.languageServer.getDescribes(document.getText(), document, token, this.userRegExp);
         const lenses = describes.reduce((lenses, spec) => {
             if (spec.specFilter) {
                 return lenses.concat([
