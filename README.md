@@ -2,7 +2,7 @@
 Allows Jasmine unit tests to be run from the editor using Bazel commands
 
 ## Features
-Adds 3 CodeLenses to `describes` and `it` statements in files with the extension `.spec.ts`
+Adds 3 CodeLenses to `describe` and `it` statements in files with the extension `.spec.ts`
 
 ### Run Test
 Runs the test using `bazel test`

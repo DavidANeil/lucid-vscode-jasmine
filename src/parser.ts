@@ -34,7 +34,6 @@ export class Parser {
                         });
                         if (syntaxList) {
                             const describeNameNode = syntaxList.getChildAt(0);
-                            let describeName: string|undefined;
                             if (describeNameNode.kind === ts.SyntaxKind.StringLiteral) {
                                 describeName = describeNameNode.getText();
                             } else {
