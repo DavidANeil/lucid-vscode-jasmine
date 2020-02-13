@@ -21,7 +21,7 @@ export function activate(context: vscode.ExtensionContext) {
 			const bazelType = instruction === Instruction.Test ? 'bazel' : 'ibazel';
 			const bazelCommand = instruction == Instruction.Debug ? 'run' : 'test';
 			const bazelOptions = ''; // or '--config=debug'
-			const ruleName = configuration.ruleName ?? 'specs';
+			const ruleName = configuration.ruleName || 'specs';
 			const prefixSpace = configuration.noHistory ? ' ' : '';
 			const cdCommand = configuration.cd === true ? `cd ${workspace.uri.path} && `: '';
 			const consoleCommand = `${prefixSpace}(${cdCommand}JAS_TARGET=$(bazel query ${pathToFile}); ${bazelType} ${bazelCommand} \${JAS_TARGET%:*}:${ruleName} ${bazelOptions} --test_filter="\${JAS_TARGET#*:}${(spec.specFilter ? '#' + spec.specFilter : '')}")`;
