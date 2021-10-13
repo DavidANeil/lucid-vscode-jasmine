@@ -34,7 +34,7 @@ export class Parser {
                         });
                         if (syntaxList) {
                             const describeNameNode = syntaxList.getChildAt(0);
-                            if (describeNameNode.kind === ts.SyntaxKind.StringLiteral) {
+                            if (describeNameNode.kind === ts.SyntaxKind.StringLiteral || describeNameNode.kind === ts.SyntaxKind.NoSubstitutionTemplateLiteral) {
                                 describeName = describeNameNode.getText();
                             } else {
                                 // find the literal if the node is module.id + ' some literal'
