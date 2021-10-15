@@ -87,8 +87,7 @@
 	"scripts": {
 		"vscode:prepublish": "npm run compile",
 		"compile": "tsc -p ./",
-		"watch": "tsc -watch -p ./",
-		"test": "npm run compile && node ./node_modules/vscode/bin/test"
+		"watch": "tsc -watch -p ./"
 	},
 	"devDependencies": {
 		"@types/vscode": "^1.61.0",
